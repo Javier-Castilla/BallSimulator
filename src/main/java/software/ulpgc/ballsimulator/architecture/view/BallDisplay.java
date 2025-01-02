@@ -3,11 +3,17 @@ package software.ulpgc.ballsimulator.architecture.view;
 import java.util.List;
 
 public interface BallDisplay {
-    void draw(List<Circle> circle);
+    void draw(List<PaintOrder> paintOrders);
 
     void on(Shift shift);
 
     void on(Released released);
+
+    void on(Click click);
+
+    int width();
+
+    int height();
 
     interface Shift {
         Shift NULL = offset -> {};
@@ -21,5 +27,11 @@ public interface BallDisplay {
         void offset(int offset);
     }
 
-    record Circle(int x, int y, int radius) {}
+    interface Click {
+        Click NULL = (xOffset, yOffset) -> {};
+
+        void offset(int xOffset, int yOffset);
+    }
+
+    record PaintOrder(int x, int y, int radius) {}
 }

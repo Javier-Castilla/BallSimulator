@@ -11,8 +11,10 @@ public class BallSimulator {
 
     public Ball simulate(Ball ball) {
         return new Ball(
-                ball.radius(),
+                ball.id(),
+                ball.x(),
                 newHeightOf(ball),
+                ball.radius(),
                 newVelocityOf(ball),
                 ball.gravity(),
                 ball.cr()
@@ -20,7 +22,7 @@ public class BallSimulator {
     }
 
     private double newHeightOf(Ball ball) {
-        return willBounce(ball) ? newHeightAfterBounce(ball) : ball.height() + ball.velocity() * dt;
+        return willBounce(ball) ? newHeightAfterBounce(ball) : ball.y() + ball.velocity() * dt;
     }
 
     private double newVelocityOf(Ball ball) {
@@ -40,7 +42,7 @@ public class BallSimulator {
     }
 
     private double timeToBounce(Ball ball) {
-        return - (ball.height() - ball.radius()) / ball.velocity();
+        return - (ball.y() - ball.radius()) / ball.velocity();
     }
 
     private static boolean isFalling(Ball ball) {
