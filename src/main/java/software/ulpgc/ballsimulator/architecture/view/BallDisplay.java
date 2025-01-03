@@ -5,30 +5,40 @@ import java.util.List;
 public interface BallDisplay {
     void draw(List<PaintOrder> paintOrders);
 
+    void clear();
+
     void on(Shift shift);
 
     void on(Released released);
 
     void on(Click click);
 
+    void on(Pressed pressed);
+
     int width();
 
     int height();
 
     interface Shift {
-        Shift NULL = offset -> {};
+        Shift NULL = (xOffset, yOffset) -> {};
 
-        void offset(int offset);
+        void offset(int xOffset, int yOffset);
     }
 
     interface Released {
-        Released NULL = offset -> {};
+        Released NULL = (xOffset, yOffset) -> {};
 
-        void offset(int offset);
+        void offset(int xOffset, int yOffset);
     }
 
     interface Click {
-        Click NULL = (xOffset, yOffset) -> {};
+        Click NULL = (button, xOffset, yOffset) -> {};
+
+        void offset(int button, int xOffset, int yOffset);
+    }
+
+    interface Pressed {
+        Pressed NULL = (xOffset, yOffset) -> {};
 
         void offset(int xOffset, int yOffset);
     }
