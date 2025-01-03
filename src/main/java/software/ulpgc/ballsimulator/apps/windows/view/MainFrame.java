@@ -1,7 +1,7 @@
 package software.ulpgc.ballsimulator.apps.windows.view;
 
 import software.ulpgc.ballsimulator.architecture.control.Command;
-import software.ulpgc.ballsimulator.architecture.view.BallDialog;
+import software.ulpgc.ballsimulator.architecture.view.BallAttributesDialog;
 import software.ulpgc.ballsimulator.architecture.view.BallDisplay;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class MainFrame extends JFrame {
     private final SwingBallDisplay display;
-    private final SwingBallDialog dialog;
+    private final SwingBallAttributesDialog dialog;
     private final Map<String, Command> commands;
 
     public MainFrame() throws HeadlessException {
@@ -30,8 +30,6 @@ public class MainFrame extends JFrame {
     private JPanel createToolbar() {
         JPanel panel = new JPanel();
         panel.add(createButton("Clear"));
-        panel.add(createButton("Stop"));
-        panel.add(createButton("Start"));
         return panel;
     }
 
@@ -41,8 +39,8 @@ public class MainFrame extends JFrame {
         return button;
     }
 
-    private SwingBallDialog createBallDialog() {
-        return new SwingBallDialog();
+    private SwingBallAttributesDialog createBallDialog() {
+        return new SwingBallAttributesDialog();
     }
 
     private SwingBallDisplay createBallDisplay() {
@@ -58,7 +56,7 @@ public class MainFrame extends JFrame {
         return this;
     }
 
-    public BallDialog dialog() {
+    public BallAttributesDialog dialog() {
         return dialog;
     }
 }

@@ -1,10 +1,6 @@
 package software.ulpgc.ballsimulator.architecture.view;
 
-import software.ulpgc.ballsimulator.architecture.model.Ball;
-
-public interface BallDialog {
-    Ball get();
-
+public interface BallAttributesDialog {
     double radius();
 
     double velocity();

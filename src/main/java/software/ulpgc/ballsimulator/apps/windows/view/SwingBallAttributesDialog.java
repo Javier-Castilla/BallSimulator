@@ -1,37 +1,22 @@
 package software.ulpgc.ballsimulator.apps.windows.view;
 
-import software.ulpgc.ballsimulator.architecture.model.Ball;
-import software.ulpgc.ballsimulator.architecture.view.BallDialog;
+import software.ulpgc.ballsimulator.architecture.view.BallAttributesDialog;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class SwingBallDialog extends JPanel implements BallDialog {
+public class SwingBallAttributesDialog extends JPanel implements BallAttributesDialog {
     private final JTextField radius;
     private final JTextField velocity;
     private final JTextField gravity;
     private final JTextField cr;
 
-    public SwingBallDialog() {
+    public SwingBallAttributesDialog() {
         setLayout(new FlowLayout());
         add(createEntry("Radius: ", this.radius = new JTextField(), "1"));
         add(createEntry("Velocity: ", this.velocity = new JTextField(), "0"));
         add(createEntry("Gravity", this.gravity = new JTextField(), "-9.8"));
         add(createEntry("Cr", this.cr = new JTextField(), "0.75"));
-        add(createColorSelector());
-    }
-
-    private JPanel createColorSelector() {
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Color"));
-        JComboBox<Color> combo = new JComboBox<>();
-        combo.addItem(Color.BLUE);
-        combo.addItem(Color.RED);
-        combo.addItem(Color.GREEN);
-        combo.addItem(Color.MAGENTA);
-        combo.addItem(Color.YELLOW);
-        panel.add(combo);
-        return panel;
     }
 
     private JPanel createEntry(String text, JTextField textField, String placeHolder) {
@@ -41,11 +26,6 @@ public class SwingBallDialog extends JPanel implements BallDialog {
         textField.setText(placeHolder);
         panel.add(textField);
         return panel;
-    }
-
-    @Override
-    public Ball get() {
-        return null;
     }
 
     @Override

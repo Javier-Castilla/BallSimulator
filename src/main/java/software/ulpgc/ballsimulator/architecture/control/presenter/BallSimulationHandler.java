@@ -19,7 +19,9 @@ public class BallSimulationHandler {
     }
 
     public Set<Ball> getBalls() {
-        return balls;
+        synchronized (balls) {
+            return balls;
+        }
     }
 
     public void simulate() {

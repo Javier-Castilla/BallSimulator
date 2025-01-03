@@ -1,14 +1,18 @@
 package software.ulpgc.ballsimulator.architecture.control.presenter;
 
+import software.ulpgc.ballsimulator.architecture.view.BallDisplay;
+
 public class BallCoordinateAdapter {
     private final double pixelsPerMeter;
+    private final BallDisplay display;
 
-    private BallCoordinateAdapter(double pixelsPerMeter) {
+    private BallCoordinateAdapter(double pixelsPerMeter, BallDisplay display) {
         this.pixelsPerMeter = pixelsPerMeter;
+        this.display = display;
     }
 
-    public static BallCoordinateAdapter with(double pixelsPerMeter) {
-        return new BallCoordinateAdapter(pixelsPerMeter);
+    public static BallCoordinateAdapter with(double pixelsPerMeter, BallDisplay display) {
+        return new BallCoordinateAdapter(pixelsPerMeter, display);
     }
 
     public int toPixels(double meters) {
@@ -19,11 +23,31 @@ public class BallCoordinateAdapter {
         return pixels / pixelsPerMeter;
     }
 
-    public int inBoundsX(int pixels) {
-        return Math.max(pixels, 0);
+    private int inBoundsForBall(int pixels, double radius) {
+        return Math.max(pixels, toPixels(radius));
     }
 
-    public int inBoundsY(int pixels, double radius) {
-        return Math.max(pixels, toPixels(radius) * 2);
+    public int inBoundsXForBall(int pixels, double radius) {
+        return inBoundsForBall(Math.min(pixels, display.width() - toPixels(radius)), radius);
+    }
+
+    public int inBoundsYForBall(int pixels, double radius) {
+        return inBoundsForBall(Math.min(pixels, display.height() - toPixels(radius)), radius);
+    }
+
+    public int inBoundsXForDisplay(int pixels, double radius) {
+        return inBoundsXForMaximumWidth(Math.max(pixels, 0), radius);
+    }
+
+    private int inBoundsXForMaximumWidth(int pixels, double radius) {
+        return Math.min(display.width() - toPixels(radius) * 2, pixels);
+    }
+
+    public int inBoundsYForDisplay(int pixels, double radius) {
+        return inBoundsForMaximumHeight(Math.max(pixels, toPixels(radius)), radius);
+    }
+
+    private int inBoundsForMaximumHeight(int pixels, double radius) {
+        return Math.min(display.height(), pixels);
     }
 }

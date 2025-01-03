@@ -8,23 +8,25 @@ import java.util.Set;
 
 public class BallRenderer {
     private final BallDisplay display;
-    private final BallCoordinateAdapter adapter;
+    private final BallCoordinateAdapter coordinateAdapter;
 
     public BallRenderer(BallDisplay display, BallCoordinateAdapter converter) {
         this.display = display;
-        this.adapter = converter;
+        this.coordinateAdapter = converter;
     }
 
     public void render(Set<Ball> balls) {
-        List<BallDisplay.PaintOrder> paintOrders = balls.stream().map(this::toPaintOrder).toList();
-        display.draw(paintOrders);
+        synchronized (balls) {
+            List<BallDisplay.PaintOrder> paintOrders = balls.stream().map(this::toPaintOrder).toList();
+            display.draw(paintOrders);
+        }
     }
 
     private BallDisplay.PaintOrder toPaintOrder(Ball ball) {
         return new BallDisplay.PaintOrder(
-                adapter.inBoundsX(adapter.toPixels(ball.x() - ball.radius())),
-                adapter.inBoundsY(adapter.toPixels(ball.y() + ball.radius()), ball.radius()),
-                adapter.toPixels(ball.radius())
+                coordinateAdapter.inBoundsXForDisplay(coordinateAdapter.toPixels(ball.x() - ball.radius()), ball.radius()),
+                coordinateAdapter.inBoundsYForDisplay(coordinateAdapter.toPixels(ball.y() + ball.radius()), ball.radius()),
+                coordinateAdapter.toPixels(ball.radius())
         );
     }
 }

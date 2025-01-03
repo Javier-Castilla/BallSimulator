@@ -2,21 +2,21 @@ package software.ulpgc.ballsimulator.architecture.control.presenter;
 
 import software.ulpgc.ballsimulator.architecture.control.BallSimulator;
 import software.ulpgc.ballsimulator.architecture.model.*;
-import software.ulpgc.ballsimulator.architecture.view.BallDialog;
+import software.ulpgc.ballsimulator.architecture.view.BallAttributesDialog;
 import software.ulpgc.ballsimulator.architecture.view.BallDisplay;
 
 import java.util.*;
 
 public class BallPresenter {
     private final BallDisplay display;
-    private final BallDialog dialog;
+    private final BallAttributesDialog dialog;
     private final BallRenderer renderer;
     private final BallSimulationHandler simulationHandler;
     private final BallInteractionHandler interactionHandler;
     private final Timer timer;
 
-    public BallPresenter(BallDisplay display, BallDialog dialog) {
-        BallCoordinateAdapter converter = BallCoordinateAdapter.with(2 / 0.1);
+    public BallPresenter(BallDisplay display, BallAttributesDialog dialog) {
+        BallCoordinateAdapter converter = BallCoordinateAdapter.with(2 / 0.1, display);
         Set<Ball> balls = new HashSet<>();
         BallHolder ballHolder = new BallHolder();
         BallSimulator simulator = new BallSimulator(0.001);

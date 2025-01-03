@@ -3,18 +3,18 @@ package software.ulpgc.ballsimulator.architecture.control.presenter;
 import software.ulpgc.ballsimulator.architecture.model.Ball;
 import software.ulpgc.ballsimulator.architecture.model.BallBuilder;
 import software.ulpgc.ballsimulator.architecture.model.BallHolder;
-import software.ulpgc.ballsimulator.architecture.view.BallDialog;
+import software.ulpgc.ballsimulator.architecture.view.BallAttributesDialog;
 import software.ulpgc.ballsimulator.architecture.view.BallDisplay;
 
 import java.util.Set;
 
 public class BallInteractionHandler {
-    private final BallDialog dialog;
+    private final BallAttributesDialog dialog;
     private final BallHolder ballHolder;
     private final Set<Ball> balls;
     private final BallCoordinateAdapter coordinateAdapter;
 
-    public BallInteractionHandler(BallDialog dialog, BallHolder ballHolder, Set<Ball> balls, BallCoordinateAdapter adapter) {
+    public BallInteractionHandler(BallAttributesDialog dialog, BallHolder ballHolder, Set<Ball> balls, BallCoordinateAdapter adapter) {
         this.dialog = dialog;
         this.ballHolder =ballHolder;
         this.balls = balls;
@@ -28,8 +28,8 @@ public class BallInteractionHandler {
                 findPressedBall(xOffset, yOffset);
             } else {
                 add((Ball) BallBuilder.create()
-                        .withX(coordinateAdapter.toMeters(xOffset))
-                        .withY(coordinateAdapter.toMeters(yOffset))
+                        .withX(coordinateAdapter.toMeters(coordinateAdapter.inBoundsXForBall(xOffset, dialog.radius())))
+                        .withY(coordinateAdapter.toMeters(coordinateAdapter.inBoundsYForBall(yOffset, dialog.radius())))
                         .withRadius(dialog.radius())
                         .withVelocity(dialog.velocity())
                         .withGravity(dialog.gravity())
@@ -58,8 +58,8 @@ public class BallInteractionHandler {
             if (ballHolder.get() == null) return;
             add((Ball) BallBuilder.create()
                     .withId(ballHolder.get().id())
-                    .withX(coordinateAdapter.toMeters(xOffset))
-                    .withY(coordinateAdapter.toMeters(yOffset))
+                    .withX(coordinateAdapter.toMeters(coordinateAdapter.inBoundsXForBall(xOffset, ballHolder.get().radius())))
+                    .withY(coordinateAdapter.toMeters(coordinateAdapter.inBoundsYForBall(yOffset, ballHolder.get().radius())))
                     .withRadius(ballHolder.get().radius())
                     .withVelocity(0)
                     .withGravity(ballHolder.get().gravity())

@@ -19,7 +19,6 @@ public class SwingBallDisplay extends JPanel implements BallDisplay {
     private final List<PaintOrder> paintOrders;
     private final static int WIDTH_GAP = 20;
     private final static int HEIGHT_GAP = 20;
-    private int initX;
 
     public SwingBallDisplay() {
         this.shift = Shift.NULL;
@@ -49,7 +48,6 @@ public class SwingBallDisplay extends JPanel implements BallDisplay {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                initX = e.getX();
                 pressed.offset(e.getX() - WIDTH_GAP / 2, (getHeight() - HEIGHT_GAP / 2) - e.getY());
             }
 
@@ -73,7 +71,7 @@ public class SwingBallDisplay extends JPanel implements BallDisplay {
         g.fillRect(0, 0, getWidth(), getHeight());
         g.setColor(Color.BLACK);
         g.fillRect(xCenterFor(width()), yCenterFor(height()), width(), height());
-        // darGrid(g);
+        darGrid(g);
     }
 
     private void darGrid(Graphics g) {
