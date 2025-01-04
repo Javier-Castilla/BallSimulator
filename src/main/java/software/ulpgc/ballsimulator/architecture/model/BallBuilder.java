@@ -1,9 +1,8 @@
 package software.ulpgc.ballsimulator.architecture.model;
 
-import java.io.InputStream;
 import java.util.Objects;
 
-public class BallBuilder implements Builder {
+public class BallBuilder implements Builder<Ball> {
     private double x;
     private double y;
     private double radius;
@@ -56,7 +55,7 @@ public class BallBuilder implements Builder {
     }
 
     @Override
-    public Object build() {
+    public Ball build() {
         return new Ball(
                 Objects.isNull(id) ? BallBuilder.ID++ : id,
                 x,

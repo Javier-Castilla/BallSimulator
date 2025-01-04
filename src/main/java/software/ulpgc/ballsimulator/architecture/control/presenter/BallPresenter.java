@@ -9,7 +9,6 @@ import java.util.*;
 
 public class BallPresenter {
     private final BallDisplay display;
-    private final BallAttributesDialog dialog;
     private final BallRenderer renderer;
     private final BallSimulationHandler simulationHandler;
     private final BallInteractionHandler interactionHandler;
@@ -20,7 +19,6 @@ public class BallPresenter {
         Set<Ball> balls = new HashSet<>();
         BallHolder ballHolder = new BallHolder();
         BallSimulator simulator = new BallSimulator(0.001);
-        this.dialog = dialog;
         this.display = display;
         this.renderer = new BallRenderer(display, converter);
         this.simulationHandler = new BallSimulationHandler(simulator, balls, ballHolder);

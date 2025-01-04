@@ -1,4 +1,6 @@
-package software.ulpgc.ballsimulator.architecture.model;
+package software.ulpgc.ballsimulator.architecture.control.presenter;
+
+import software.ulpgc.ballsimulator.architecture.model.Ball;
 
 public class BallHolder {
     private final Ball[] ball;

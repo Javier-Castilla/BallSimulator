@@ -2,7 +2,6 @@ package software.ulpgc.ballsimulator.architecture.control.presenter;
 
 import software.ulpgc.ballsimulator.architecture.model.Ball;
 import software.ulpgc.ballsimulator.architecture.model.BallBuilder;
-import software.ulpgc.ballsimulator.architecture.model.BallHolder;
 import software.ulpgc.ballsimulator.architecture.view.BallAttributesDialog;
 import software.ulpgc.ballsimulator.architecture.view.BallDisplay;
 
@@ -27,7 +26,7 @@ public class BallInteractionHandler {
             if (button == 3) {
                 findPressedBall(xOffset, yOffset);
             } else {
-                add((Ball) BallBuilder.create()
+                add(BallBuilder.create()
                         .withX(coordinateAdapter.toMeters(coordinateAdapter.inBoundsXForBall(xOffset, dialog.radius())))
                         .withY(coordinateAdapter.toMeters(coordinateAdapter.inBoundsYForBall(yOffset, dialog.radius())))
                         .withRadius(dialog.radius())
@@ -56,7 +55,7 @@ public class BallInteractionHandler {
     public BallDisplay.Shift shift() {
         return (xOffset, yOffset) -> {
             if (ballHolder.get() == null) return;
-            add((Ball) BallBuilder.create()
+            add(BallBuilder.create()
                     .withId(ballHolder.get().id())
                     .withX(coordinateAdapter.toMeters(coordinateAdapter.inBoundsXForBall(xOffset, ballHolder.get().radius())))
                     .withY(coordinateAdapter.toMeters(coordinateAdapter.inBoundsYForBall(yOffset, ballHolder.get().radius())))

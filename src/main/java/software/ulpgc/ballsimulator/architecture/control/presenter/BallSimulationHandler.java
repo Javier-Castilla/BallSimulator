@@ -2,7 +2,6 @@ package software.ulpgc.ballsimulator.architecture.control.presenter;
 
 import software.ulpgc.ballsimulator.architecture.control.BallSimulator;
 import software.ulpgc.ballsimulator.architecture.model.Ball;
-import software.ulpgc.ballsimulator.architecture.model.BallHolder;
 
 import java.util.List;
 import java.util.Set;
