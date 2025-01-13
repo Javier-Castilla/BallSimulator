@@ -1,4 +1,4 @@
-# Gravity Ball Simulator
+# Bounce Ball Simulator
 ## Description
 Simple project to visualize the physics of a falling ball.
 ## Functionalities
