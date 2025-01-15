@@ -5,8 +5,6 @@ import java.util.List;
 public interface BallDisplay {
     void draw(List<PaintOrder> paintOrders);
 
-    void clear();
-
     void on(Shift shift);
 
     void on(Released released);

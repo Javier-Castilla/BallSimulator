@@ -82,11 +82,11 @@ public class SwingBallDisplay extends JPanel implements BallDisplay {
     }
 
     private int yCenterFor(int height) {
-        return (getHeight() - height()) / 2;
+        return (getHeight() - height) / 2;
     }
 
     private int xCenterFor(int width) {
-        return (getWidth() - width()) / 2;
+        return (getWidth() - width) / 2;
     }
 
     private void drawPaintOrder(Graphics g, PaintOrder p) {
@@ -106,11 +106,6 @@ public class SwingBallDisplay extends JPanel implements BallDisplay {
             this.paintOrders.addAll(paintOrders);
         }
         repaint();
-    }
-
-    @Override
-    public void clear() {
-
     }
 
     @Override
