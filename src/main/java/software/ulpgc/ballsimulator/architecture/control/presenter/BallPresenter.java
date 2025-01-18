@@ -38,10 +38,6 @@ public class BallPresenter {
         timer.schedule(task(), 1, 1);
     }
 
-    public void stopExecution() {
-        timer.cancel();
-    }
-
     public void clear() {
         simulationHandler.getBalls().clear();
     }
